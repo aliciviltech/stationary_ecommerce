@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+  --primaryColor:rgb(0, 175, 206);
+}
