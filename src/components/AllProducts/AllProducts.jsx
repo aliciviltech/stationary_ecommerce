@@ -16,10 +16,10 @@ const AllProducts = () => {
                 return(
                     <div key={item.id} className="ProductCard relative w-[300px] h-[400px] flex flex-col gap-4 rounded-lg shadow-2xl p-6">
                         <div className="image h-[230px]">
-                            <img className='w-[100%] h-[100%] object-cover' src="/images/my_pencil_dollar.jpg" alt="img" />
+                            <img className='w-[100%] h-[100%] object-cover' src={item.imageURL} alt="img" />
                         </div>
                         <div className="text flex flex-col gap-2">
-                            <h3 className="title font-bold">My pencil {`(Wow)`} Dollor </h3>
+                            <h3 className="title font-bold">{item.title}</h3>
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                             <div className='font-bold bg-[var(--primaryColor)] text-[#fff] text-center p-1 flex gap-4 items-center justify-center' onClick={()=>dispatch(addItem({...item, quantity:1}))}>Add to Cart <i className='fa-solid fa-cart-plus'></i></div>
                         </div>
