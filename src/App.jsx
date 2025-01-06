@@ -1,15 +1,19 @@
 import React from 'react'
-import Header from './components/Header/Header'
-import AllProducts from './components/AllProducts/AllProducts'
 import './App.css'
-import Cart from './components/Cart/Cart'
+import {Route, Routes} from 'react-router-dom';
+import Home from './components/Home/Home';
+import routers from './routers/routers';
 
 const App = () => {
   return (
     <div className='App'>
-      <Header/>
-      <AllProducts/>
-      <Cart/>
+      <Routes>
+      {/* <Route element={<Home/>} path={'/'} /> */}
+
+          {
+            routers.map((route)=> <Route key={route.id} element={route.element} path={route.path} />  )
+          }        
+      </Routes>
     </div>
   )
 }
