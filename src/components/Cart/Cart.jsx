@@ -9,7 +9,7 @@ const Cart = () => {
     const [showDrawer, setShowDrawer] = useState(false)
     return (
         <div className="Cart">
-            <div className='fixed bottom-2 right-6 w-fit ' onClick={() => setShowDrawer(true)}>
+            <div className='cursor-pointer fixed bottom-2 right-6 w-fit ' onClick={() => setShowDrawer(!showDrawer)}>
                 <Badge count={stateData?.cartItems.length}>
                     <i className='fa-solid fa-cart-shopping text-2xl'></i>
                 </Badge>
@@ -21,7 +21,7 @@ const Cart = () => {
                 {/* header */}
                 <div className="header flex justify-between p-2">
                     <div className="heading">Shoping Cart</div>
-                    <div className="close " onClick={()=>setShowDrawer(false)}>Close <i className='fa-solid fa-close'></i></div>
+                    <div className="close cursor-pointer" onClick={()=>setShowDrawer(false)}>Close <i className='fa-solid fa-close'></i></div>
                 </div>
                 <div className="borderLine h-[2px] w-[90%]  mx-auto mt-2 bg-gray-500"></div>
                 
