@@ -9,5 +9,9 @@
   --primaryColor:rgb(0, 175, 206);
 }
 
+*{
+  scroll-behavior: smooth;
+}
+
 body{
 }

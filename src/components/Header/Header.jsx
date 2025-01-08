@@ -17,6 +17,7 @@ const Header = () => {
     const handleInputEnterKey = (event)=>{
         if(event.key === 'Enter'){
             handleSearch()
+            event.target.blur()
         }
     }
     return (

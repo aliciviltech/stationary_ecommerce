@@ -9,9 +9,9 @@ const Cart = () => {
     const [showDrawer, setShowDrawer] = useState(false)
     return (
         <div className="Cart">
-            <div className='cursor-pointer fixed bottom-2 right-6 w-fit ' onClick={() => setShowDrawer(!showDrawer)}>
+            <div className='cursor-pointer fixed bottom-16 right-4 w-fit ' onClick={() => setShowDrawer(!showDrawer)}>
                 <Badge count={stateData?.cartItems.length}>
-                    <i className='fa-solid fa-cart-shopping text-2xl'></i>
+                    <i className='fa-solid fa-cart-shopping text-3xl'></i>
                 </Badge>
             </div>
 
