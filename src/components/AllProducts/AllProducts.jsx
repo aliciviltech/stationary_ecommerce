@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addItem, saveAllProducts } from '../../redux/reducers/cartReducer';
-import { getReq, postReq, putReq } from '../../api/axios';
+import { addItem, saveAllProducts, searchReducer } from '../../redux/reducers/cartReducer';
 import { AllProductsData } from '../../utils/AllProductsData';
 
 const AllProducts = () => {
+    const [showProducts, setShowProducts] = useState(AllProductsData);
     const productsDataFromDB = useSelector(state => state.cartReducer.AllProductsData);
+    const searchInputValue = useSelector((state) => state.cartReducer.searchKeyword)
+
     const dispatch = useDispatch();
     console.log(productsDataFromDB)
 
@@ -17,6 +19,23 @@ const AllProducts = () => {
     // ================== getting all products locally =================
     const getAllProductsLocally = () => {
         dispatch(saveAllProducts(AllProductsData));
+        setShowProducts(AllProductsData)
+    }
+
+    useEffect(()=>{
+        if (searchInputValue) {
+            const updatedProducts = AllProductsData.filter((product) => product.title.toLowerCase().includes(searchInputValue.toLowerCase()))
+            setShowProducts(updatedProducts)
+        } else{
+            getAllProductsLocally()
+        }
+    },[searchInputValue])
+
+
+    // remove search results
+    const removeSearchResults = ()=>{
+        getAllProductsLocally()
+        dispatch(searchReducer(''));
     }
 
 
@@ -59,11 +78,23 @@ const AllProducts = () => {
 
     return (
         <div className="AllProducts py-12 w-[95%] max-w-[1400px] mx-auto">
-            <h1 className='font-bold my-6'>All Products</h1>
+
+            {
+                searchInputValue ?
+                <div>
+                    <h1 className='w-fit my-6 bg-gray-200 px-3 py-1 cursor-pointer' onClick={removeSearchResults}> <i className="fa-solid fa-circle-arrow-left"></i> Back to All Products</h1>
+                    <h1 className='font-bold'>Search Results for: {searchInputValue}</h1>
+                </div>
+                :
+                <h1 className='font-bold my-6'>All Products</h1> 
+            }
             {/* <button className='bg-red-500 ' onClick={addAllProducts}>add all products</button> */}
             <div className=' flex flex-wrap justify-center gap-4'>
                 {
-                    productsDataFromDB?.map((item, index) => {
+                    showProducts.length === 0 ?
+                    <h1> No products found</h1>
+                    :
+                    showProducts?.map((item, index) => {
                         return (
                             <div key={item.id} className="ProductCard relative w-[300px] h-[400px] flex flex-col gap-4 rounded-lg shadow-2xl p-6">
                                 <div className="image h-[230px] relative">
